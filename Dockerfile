@@ -1,14 +1,14 @@
-FROM ruby:2.7.1-alpine
+FROM ruby:3.1.2-alpine
 
-RUN set -xe \
-    && apk add --no-cache \
+RUN set -xe; \
+    apk add --no-cache \
         libstdc++ \
-        sqlite-libs \
-    && apk add --no-cache --virtual .build-deps \
+        sqlite-libs; \
+    apk add --no-cache --virtual .build-deps \
         build-base \
-        sqlite-dev \
-    && gem install mailcatcher -v 0.7.1 \
-    && apk del .build-deps
+        sqlite-dev; \
+    gem install mailcatcher -v 0.8.2; \
+    apk del .build-deps
 
 # smtp port
 EXPOSE 1025
